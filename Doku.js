@@ -1,7 +1,11 @@
 /* jslint esversion: 6  */
 
+//Hintergründe
 let hintergrund = loadImage("FahrplanDoku1.png");
 let hintergrundMob = loadImage("FahrplanDokuMobilität.png");
+
+//Texte
+let text1 = loadImage("Einleitung.png");
 
 let count = 0;
 
@@ -20,8 +24,11 @@ class Background{
     }   
 }
 
-let back1 = new Background(hintergrund, 0,0,windowWidth);
-let backMob = new Background(hintergrundMob, 0,0,windowWidth);
+let back1 = new Background(hintergrund, 0,0,windowWidth,windowWidth*2);
+let backMob = new Background(hintergrundMob, 0,0,windowWidth,windowWidth*2);
+
+//Texte
+let einleitung = new Background(text1,windowWidth/9,windowWidth/13,430,300);
 //Button-Rechnungen
 function mouseClicked(){
     if ((count==0)&&(mouseX>200)){
@@ -32,6 +39,7 @@ function mouseClicked(){
 function draw(){
     if (count==0){
     back1.display();
+    einleitung.display();
     }
     if (count==2){
     backMob.display();
