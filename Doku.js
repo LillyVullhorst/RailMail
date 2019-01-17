@@ -12,6 +12,9 @@ let buttonkasten = loadImage("ButtonHilfe.png");
 let text1 = loadImage("Texte/Einleitung.png");
 let text2 = loadImage("Texte/Problem.png");
 
+//Bilder
+let umschlagslager = loadImage("Umschlagslagervonoben.png");
+
 let count = 0;
 
 
@@ -39,6 +42,11 @@ let bkasten = new Background(buttonkasten,windowWidth/1.1,windowWidth/1,windowWi
 //Texte
 let einleitung = new Background(text1,windowWidth/9,windowWidth/13,430,300);
 let problem = new Background(text2,windowWidth/9,windowWidth/1.4,650,300);
+
+
+//Bilder
+let umschlagslagerbild = new Background(umschlagslager, windowWidth/9,windowWidth/13,430,300)
+
 //Button-Rechnungen
 //x=je größer je näher ist die links , y = je größer je weiter ist die oben
 function mouseClicked(){    
@@ -67,19 +75,20 @@ function mouseClicked(){
 
 function draw(){
     clear();
-    if (count==0){
+    if (count==0){  //Einleitung
     back1.display();
     einleitung.display();
     problem.display();
     //bkasten.display();
     }
-    if (count==2){
+    if (count==2){   //Mobilität für uns
     backMob.display();
     }
-    if (count==3){
+    if (count==3){   //Der Hauptumschagspunkt
         backtech.display();
+        umschlagslagerbild.display();
     }
-    if (count==5){
+    if (count==5){   //Unser Endnutzer//Unser Kunde
         backKunde.display();
     }
     }
