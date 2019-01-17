@@ -10,6 +10,7 @@ let buttonkasten = loadImage("ButtonHilfe.png");
 
 //Texte
 let text1 = loadImage("Texte/Einleitung.png");
+let text2 = loadImage("Texte/Problem.png");
 
 let count = 0;
 
@@ -37,7 +38,7 @@ let bkasten = new Background(buttonkasten,windowWidth/1.1,windowWidth/1,windowWi
 
 //Texte
 let einleitung = new Background(text1,windowWidth/9,windowWidth/13,430,300);
-
+let problem = new Background(text2,windowWidth/9,windowWidth/1.4,650,300);
 //Button-Rechnungen
 //x=je größer je näher ist die links , y = je größer je weiter ist die oben
 function mouseClicked(){    
@@ -69,6 +70,7 @@ function draw(){
     if (count==0){
     back1.display();
     einleitung.display();
+    problem.display();
     //bkasten.display();
     }
     if (count==2){
