@@ -47,7 +47,8 @@ function mouseClicked(){
     }
     //Der Hauptumschagspunkt
     if ((count==0)&&(mouseX>windowWidth/20)&&(mouseX<windowWidth/20+windowWidth/15)&&(mouseY>windowWidth/0.6)&&(mouseY<windowWidth/0.6+windowWidth/15)){
-        count =3; 
+        count =3;
+        createCanvas(windowWidth,windowWidth*3.25); 
     }
     //Nachricht
     if ((count==0)&&(mouseX>windowWidth/6)&&(mouseX<windowWidth/6+windowWidth/15)&&(mouseY>windowWidth/0.53)&&(mouseY<windowWidth/0.53+windowWidth/15)){
