@@ -12,11 +12,28 @@ let buttonkasten = loadImage("ButtonHilfe.png");
 let text1 = loadImage("Texte/Einleitung.png");
 let text2 = loadImage("Texte/Problem.png");
 
+let gif = loadImage("Schienen.gif");
+
 //Bilder
-let umschlagslager = loadImage("Umschlagslagervonoben.png");
+let umschlagslager = loadImage("Bilder/Umschlagslagervonoben.png");
+
+
 
 let count = 0;
-
+/* 
+var gif = new GIF({
+    workers: 2,
+    quality: 10
+  });
+  
+  // add a image element
+  gif.addFrame(imageElement);
+  
+  gif.on('Schienen.gif', function(blob) {
+    window.open(URL.createObjectURL(blob));
+  }); */
+  
+ // gif.render();
 
 class Background{
     constructor(pic, X, Y, myWidth, myHeight){
@@ -35,7 +52,7 @@ class Background{
 let back1 = new Background(hintergrund, 0,0,windowWidth,windowWidth*2);
 let backMob = new Background(hintergrundMob, 0,0,windowWidth,windowWidth*2);
 let backtech = new Background(hintergrundtech, 0,0,windowWidth,windowWidth*3.25);
-let backKunde = new Background(hintergrundKunde,0,0,windowWidth,windowWidth*2);
+let backKunde = new Background(hintergrundKunde,0,0,windowWidth,windowWidth*3.25);
 
 let bkasten = new Background(buttonkasten,windowWidth/1.1,windowWidth/1,windowWidth/15,windowWidth/15);
 
@@ -46,6 +63,7 @@ let problem = new Background(text2,windowWidth/9,windowWidth/1.4,650,300);
 
 //Bilder
 let umschlagslagerbild = new Background(umschlagslager, windowWidth/9,windowWidth/13,430,300)
+let Schienen = new Background(gif,windowWidth/9,windowWidth/1,500,250)
 
 //Button-Rechnungen
 //x=je größer je näher ist die links , y = je größer je weiter ist die oben
@@ -79,6 +97,7 @@ function draw(){
     back1.display();
     einleitung.display();
     problem.display();
+    Schienen.display();
     //bkasten.display();
     }
     if (count==2){   //Mobilität für uns
