@@ -37,6 +37,8 @@ let count = 0;
 let station = 0; 
 let transport =0;
 let pack = 0;
+
+
 /* 
 var gif = new GIF({
     workers: 2,
@@ -70,7 +72,7 @@ let back1 = new Background(hintergrund, 0,0,windowWidth,windowWidth*2);
 let backMob = new Background(hintergrundMob, 0,0,windowWidth,windowWidth*2);
 let backtech = new Background(hintergrundtech, 0,0,windowWidth,windowWidth*3.25);
 let backKunde = new Background(hintergrundKunde,0,0,windowWidth,windowWidth*3.25);
-let abholung = new Background (hintergrundAbholung, 0,0,windowWidth,windowWidth*2);
+let abholung = new Background (hintergrundAbholung, 0,0,windowWidth,windowWidth*1.5);
 
 let bkasten = new Background(buttonkasten,windowWidth/1.74,windowWidth/0.6,windowWidth/4.6,windowWidth/20);
 
@@ -101,23 +103,35 @@ function mouseClicked(){
     //->Mobilität für uns            
     if ((count==0)&&(mouseX>windowWidth/1.17)&&(mouseX<windowWidth/1.17+windowWidth/15)&&(mouseY>windowWidth/6.15)&&(mouseY<windowWidth/6.15+windowWidth/15)){
         count =2; 
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
     }
     //Der Hauptumschagspunkt
     if ((count==0)&&(mouseX>windowWidth/20)&&(mouseX<windowWidth/20+windowWidth/15)&&(mouseY>windowWidth/0.6)&&(mouseY<windowWidth/0.6+windowWidth/15)){
         count =3;
         createCanvas(windowWidth,windowWidth*3.25); 
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
     }
     //Nachricht Pfeil & Liefern lassen
     if ((count==0)&&(mouseX>windowWidth/6)&&(mouseX<windowWidth/6+windowWidth/15)&&(mouseY>windowWidth/0.53)&&(mouseY<windowWidth/0.53+windowWidth/15)){
         count =4; 
+        createCanvas(windowWidth,windowWidth*1.5); 
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
     }
     if ((count==0)&&(mouseX>windowWidth/1.74)&&(mouseX<windowWidth/1.74+windowWidth/4.6)&&(mouseY>windowWidth/0.6)&&(mouseY<windowWidth/0.6+windowWidth/20)){
         count =4; 
+        createCanvas(windowWidth,windowWidth*1.5); 
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
     }
     
     //Unsere Kunden
     if ((count==0)&&(mouseX>windowWidth/1.1)&&(mouseX<windowWidth/1.1+windowWidth/15)&&(mouseY>windowWidth/1)&&(mouseY<windowWidth/1+windowWidth/15)){
         count =5; 
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
     }
     //zurück zum Start (Mobilität für uns)
     if ((count==2)&&(mouseX>windowWidth/20)&&(mouseX<windowWidth/20+windowWidth/15)&&(mouseY>windowWidth/6)&&(mouseY<windowWidth/6+windowWidth/15)){
