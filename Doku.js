@@ -64,9 +64,9 @@ let back1 = new Background(hintergrund, 0,0,windowWidth,windowWidth*2);
 let backMob = new Background(hintergrundMob, 0,0,windowWidth,windowWidth*2);
 let backtech = new Background(hintergrundtech, 0,0,windowWidth,windowWidth*3.25);
 let backKunde = new Background(hintergrundKunde,0,0,windowWidth,windowWidth*3.25);
-let Abholung = new Background (hintergrundAbholung, 0,0,windowWidth,windowWidth*2);
+let abholung = new Background (hintergrundAbholung, 0,0,windowWidth,windowWidth*2);
 
-let bkasten = new Background(buttonkasten,windowWidth/8,windowWidth/60,windowWidth/15,windowWidth/15);
+let bkasten = new Background(buttonkasten,windowWidth/1.74,windowWidth/0.6,windowWidth/4.6,windowWidth/20);
 
 //Texte
 let einleitung = new Background(text1,windowWidth/9,windowWidth/13,430,300);
@@ -80,7 +80,7 @@ let umschlagslagerbild = new Background(umschlagslager, windowWidth/9,windowWidt
 let dasTeam = new Background(team,windowWidth/9,windowWidth/3,450,300);
 let stationAus = new Background(station1,windowWidth/7,windowWidth/1.2,400,400);
 let stationAn = new Background(station2,windowWidth/7,windowWidth/1.2,400,400);
-let stationFach =new Background(station3,windowWidth/7,windowWidth/1.2,400,400);
+let stationFach = new Background(station3,windowWidth/7,windowWidth/1.2,400,400);
 let dasPaket = new Background(station4,windowWidth/5.61,windowWidth/1.07,86,80);
 //let Schienen = new Background(gif,windowWidth/9,windowWidth/1,500,250)
 
@@ -117,7 +117,7 @@ function mouseClicked(){
         count =0; 
     }
      //zurück zum Start (Die Abholung)
-     if ((count=4)&&(mouseX>windowWidth/8)&&(mouseX<windowWidth/8+windowWidth/15)&&(mouseY>windowWidth/60)&&(mouseY<windowWidth/60+windowWidth/15)){
+     if ((count==4)&&(mouseX>windowWidth/8)&&(mouseX<windowWidth/8+windowWidth/15)&&(mouseY>windowWidth/60)&&(mouseY<windowWidth/60+windowWidth/15)){
         count =0; 
     }
     //zurück zum Start (Der Kunde)
@@ -126,7 +126,6 @@ function mouseClicked(){
     }
     //Paket erscheint
     if ((count==4)&&(mouseX>windowWidth/7)&&(mouseX<windowWidth/7+200)&&(mouseY>windowWidth/1.2)&&(mouseY<windowWidth/1.2+400)){
-        count=4;
         station=2;
         pack=1;
     }
@@ -137,22 +136,9 @@ function mouseClicked(){
 
 function draw(){
     clear();
-     //Die Stationsinteraktion
-     //Bildschirm aktiv
- if ((count==4)&&(mouseX>windowWidth/7+200)&&(mouseX<windowWidth/7+400)&&(mouseY>windowWidth/1.2)&&(mouseY<windowWidth/1.2+400)){
-    count=4;
-    station=1;
-}
-//Paketfach aktiv
-if ((count==4)&&(mouseX>windowWidth/7)&&(mouseX<windowWidth/7+200)&&(mouseY>windowWidth/1.2)&&(mouseY<windowWidth/1.2+400)){
-    count=4;
-    station=2;
-}
-//Alles inaktiv
-if ((count==4)&&((mouseX<windowWidth/7)||(mouseX>windowWidth/7+400)||(mouseY<windowWidth/1.2)||(mouseY>windowWidth/1.2+400))){
-    count=4;
-    station=0;
-}   
+   
+  
+ 
     if (count==0){  //Einleitung
     back1.display();
     einleitung.display();
@@ -160,7 +146,8 @@ if ((count==4)&&((mouseX<windowWidth/7)||(mouseX>windowWidth/7+400)||(mouseY<win
     //Schienen.display();
     dasTeam.display();
     einPaketBestellen.display();
-    //bkasten.display();
+    bkasten.display();
+   
     }
 
     if (count==2){   //Mobilität für uns
@@ -171,14 +158,29 @@ if ((count==4)&&((mouseX<windowWidth/7)||(mouseX>windowWidth/7+400)||(mouseY<win
         backtech.display();
         umschlagslagerbild.display(); 
     }
+    //Die Stationsinteraktion
+    //Bildschirm aktiv
+    if ((count==4)&&(mouseX>windowWidth/7+200)&&(mouseX<windowWidth/7+400)&&(mouseY>windowWidth/1.2)&&(mouseY<windowWidth/1.2+400)){
+       
+        station=1;
+    }
+    //Paketfach aktiv
+    if ((count==4)&&(mouseX>windowWidth/7)&&(mouseX<windowWidth/7+200)&&(mouseY>windowWidth/1.2)&&(mouseY<windowWidth/1.2+400)){
+      
+        station=2;
+    }
+    //Alles inaktiv
+    if ((count==4)&&((mouseX<windowWidth/7)||(mouseX>windowWidth/7+400)||(mouseY<windowWidth/1.2)||(mouseY>windowWidth/1.2+400))){
+       
+        station=0;
+    }   
 
     if(count==4){
        
         
-        Abholung.display();
+        abholung.display();
         Nachricht.display();
         stationAus.display();
-        bkasten.display();
         DieStation.display();
    
       
@@ -196,6 +198,7 @@ if ((count==4)&&((mouseX<windowWidth/7)||(mouseX>windowWidth/7+400)||(mouseY<win
     if (count==5){   //Unser Endnutzer//Unser Kunde
         backKunde.display(); 
     }
+    console.log(count);
     
 
     }
