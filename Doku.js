@@ -15,6 +15,7 @@ let text2 = loadImage("Texte/Problem.png");
 let text3 = loadImage("Texte/EinPaketbestellen.png");
 let text4 = loadImage("Texte/nachricht.png");
 let text5 = loadImage("Texte/dieStation.png");
+let text6 = loadImage("Texte/lastMile.png");
 
 //let gif = loadImage("Schienen.gif");
 
@@ -25,11 +26,16 @@ let station1 =loadImage("Bilder/PaketstationAus.png");
 let station2 = loadImage("Bilder/PaketstationAktiv.png");
 let station3 = loadImage("Bilder/PaketstationFach.png");
 let station4 =loadImage("Bilder/Paket.png");
+let rad = loadImage("Bilder/Transportfahrrad.png");
+let radhover = loadImage("Bilder/Transportfahrradhover.png");
+let bag =loadImage("Bilder/Transporttasche.png");
+let baghover =loadImage("Bilder/Transporttaschehover.png");
 
 
 
 let count = 0;
 let station = 0; 
+let transport =0;
 let pack = 0;
 /* 
 var gif = new GIF({
@@ -74,6 +80,7 @@ let problem = new Background(text2,windowWidth/9,windowWidth/1.4,650,300);
 let einPaketBestellen = new Background(text3,windowWidth/4,windowWidth/0.8,930,800);
 let Nachricht = new Background(text4,windowWidth/5.5,windowWidth/8,735,928);
 let DieStation = new Background(text5,windowWidth/2.5,windowWidth/1.2,627,371);
+let LastMile = new Background(text6,windowWidth/7,windowWidth/0.78,1135,197);
 
 //Bilder
 let umschlagslagerbild = new Background(umschlagslager, windowWidth/9,windowWidth/13,430,300);
@@ -82,6 +89,10 @@ let stationAus = new Background(station1,windowWidth/7,windowWidth/1.2,400,400);
 let stationAn = new Background(station2,windowWidth/7,windowWidth/1.2,400,400);
 let stationFach = new Background(station3,windowWidth/7,windowWidth/1.2,400,400);
 let dasPaket = new Background(station4,windowWidth/5.61,windowWidth/1.07,86,80);
+let dasRad = new Background(rad,windowWidth/2.48,windowWidth/0.85,380,200);
+let dasRadHover = new Background(radhover,windowWidth/2.48,windowWidth/0.85,380,200);
+let Tasche = new Background(bag,windowWidth/4,windowWidth/0.9,180,300);
+let Taschehover = new Background (baghover,windowWidth/4,windowWidth/0.9,190,300);
 //let Schienen = new Background(gif,windowWidth/9,windowWidth/1,500,250)
 
 //Button-Rechnungen
@@ -166,14 +177,26 @@ function draw(){
     }
     //Paketfach aktiv
     if ((count==4)&&(mouseX>windowWidth/7)&&(mouseX<windowWidth/7+200)&&(mouseY>windowWidth/1.2)&&(mouseY<windowWidth/1.2+400)){
-      
         station=2;
     }
+    
     //Alles inaktiv
     if ((count==4)&&((mouseX<windowWidth/7)||(mouseX>windowWidth/7+400)||(mouseY<windowWidth/1.2)||(mouseY>windowWidth/1.2+400))){
-       
         station=0;
     }   
+   // let dasRadHover = new Background(radhover,windowWidth/2.48,windowWidth/0.85,380,200);
+    //let Tasche = new Background(bag,windowWidth/4,windowWidth/0.9,180,300);
+    //Rad beim hovern
+    if ((count==4)&&(mouseX>windowWidth/2.48)&&(mouseX<windowWidth/2.48+380)&&(mouseY>windowWidth/0.85)&&(mouseY<windowWidth/0.85+200)){
+        transport=1;
+    }
+    //Tasche beim hovern
+    if ((count==4)&&(mouseX>windowWidth/4)&&(mouseX<windowWidth/4+180)&&(mouseY>windowWidth/0.9)&&(mouseY<windowWidth/0.9+300)){
+        transport=2;
+      } 
+      if ((count==4)&&((mouseX<windowWidth/4)||(mouseX>windowWidth/4+560)||(mouseY<windowWidth/0.9)||(mouseY>windowWidth/0.9+300))){
+        transport=0;
+    } 
 
     if(count==4){
        
@@ -182,13 +205,21 @@ function draw(){
         Nachricht.display();
         stationAus.display();
         DieStation.display();
-   
+        dasRad.display();
+        Tasche.display();
+        LastMile.display();
       
         if (station==1){
             stationAn.display();
         }
         if (station==2){
             stationFach.display();
+        } 
+        if (transport==2){
+            Taschehover.display();
+        } 
+        if (transport==1){
+            dasRadHover.display();
         } 
         if (pack == 1){
             dasPaket.display();
@@ -198,7 +229,7 @@ function draw(){
     if (count==5){   //Unser Endnutzer//Unser Kunde
         backKunde.display(); 
     }
-    console.log(count);
+    console.log(station);
     
 
     }
