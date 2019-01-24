@@ -76,7 +76,7 @@ let backtech = new Background(hintergrundtech, 0,0,windowWidth,windowWidth*3.25)
 let backKunde = new Background(hintergrundKunde,0,0,windowWidth,windowWidth*3.25);
 let abholung = new Background (hintergrundAbholung, 0,0,windowWidth,windowWidth*1.5);
 
-let bkasten = new Background(buttonkasten,windowWidth/1.74,windowWidth/0.6,windowWidth/4.6,windowWidth/20);
+let bkasten = new Background(buttonkasten,windowWidth/1.9,windowWidth/0.617,windowWidth/4.6,windowWidth/20);
 
 //Texte
 let einleitung = new Background(text1,windowWidth/9,windowWidth/13,windowWidth/4.465,windowWidth/6.4);
@@ -89,16 +89,16 @@ let mobil = new Background(text7,windowWidth/7,windowWidth/4,windowWidth/1.67,wi
 let abstract = new Background(text8,windowWidth/7,windowWidth/1.5,windowWidth/1.649,windowWidth/7.9);
 
 //Bilder
-let umschlagslagerbild = new Background(umschlagslager, windowWidth/9,windowWidth/13,430,300);
-let dasTeam = new Background(team,windowWidth/9,windowWidth/3,450,300);
-let stationAus = new Background(station1,windowWidth/7,windowWidth/1.2,400,400);
-let stationAn = new Background(station2,windowWidth/7,windowWidth/1.2,400,400);
-let stationFach = new Background(station3,windowWidth/7,windowWidth/1.2,400,400);
-let dasPaket = new Background(station4,windowWidth/5.61,windowWidth/1.07,86,80);
-let dasRad = new Background(rad,windowWidth/2.48,windowWidth/0.85,380,200);
-let dasRadHover = new Background(radhover,windowWidth/2.48,windowWidth/0.85,380,200);
-let Tasche = new Background(bag,windowWidth/4,windowWidth/0.9,180,300);
-let Taschehover = new Background (baghover,windowWidth/4,windowWidth/0.9,190,300);
+let umschlagslagerbild = new Background(umschlagslager, windowWidth/9,windowWidth/13,windowWidth/4.465,windowWidth/6.4);
+let dasTeam = new Background(team,windowWidth/9,windowWidth/3,windowWidth/4.27,windowWidth/6.4);
+let stationAus = new Background(station1,windowWidth/7,windowWidth/1.2,windowWidth/4.8,windowWidth/4.8);
+let stationAn = new Background(station2,windowWidth/7,windowWidth/1.2,windowWidth/4.8,windowWidth/4.8);
+let stationFach = new Background(station3,windowWidth/7,windowWidth/1.2,windowWidth/4.8,windowWidth/4.8);
+let dasPaket = new Background(station4,windowWidth/5.75,windowWidth/1.08,windowWidth/22.326,windowWidth/24);
+let dasRad = new Background(rad,windowWidth/2.48,windowWidth/0.85,windowWidth/5.05,windowWidth/9.6);
+let dasRadHover = new Background(radhover,windowWidth/2.48,windowWidth/0.85,windowWidth/5.05,windowWidth/9.6);
+let Tasche = new Background(bag,windowWidth/4,windowWidth/0.9,windowWidth/10.67,windowWidth/6.4);
+let Taschehover = new Background (baghover,windowWidth/4,windowWidth/0.9,windowWidth/10.10,windowWidth/6.4);
 //let Schienen = new Background(gif,windowWidth/9,windowWidth/1,500,250)
 
 //Button-Rechnungen
@@ -124,7 +124,8 @@ function mouseClicked(){
         document.body.scrollTop = 0;
         document.documentElement.scrollTop = 0;
     }
-    if ((count==0)&&(mouseX>windowWidth/1.74)&&(mouseX<windowWidth/1.74+windowWidth/4.6)&&(mouseY>windowWidth/0.6)&&(mouseY<windowWidth/0.6+windowWidth/20)){
+    //Nachricht mit Button
+    if ((count==0)&&(mouseX>windowWidth/1.9)&&(mouseX<windowWidth/1.9+windowWidth/4.6)&&(mouseY>windowWidth/0.617)&&(mouseY<windowWidth/0.617+windowWidth/20)){
         count =4; 
         createCanvas(windowWidth,windowWidth*1.5); 
         document.body.scrollTop = 0;
@@ -158,7 +159,7 @@ function mouseClicked(){
         createCanvas(windowWidth,windowWidth*2);
     }
     //Paket erscheint
-    if ((count==4)&&(mouseX>windowWidth/7)&&(mouseX<windowWidth/7+200)&&(mouseY>windowWidth/1.2)&&(mouseY<windowWidth/1.2+400)){
+    if ((count==4)&&(mouseX>windowWidth/7)&&(mouseX<windowWidth/7+windowWidth/9.6)&&(mouseY>windowWidth/1.2)&&(mouseY<windowWidth/1.2+windowWidth/4.8)){
         station=2;
         pack=1;
     }
@@ -195,30 +196,28 @@ function draw(){
     }
     //Die Stationsinteraktion
     //Bildschirm aktiv
-    if ((count==4)&&(mouseX>windowWidth/7+200)&&(mouseX<windowWidth/7+400)&&(mouseY>windowWidth/1.2)&&(mouseY<windowWidth/1.2+400)){
+    if ((count==4)&&(mouseX>windowWidth/7+windowWidth/9.6)&&(mouseX<windowWidth/7+windowWidth/4.8)&&(mouseY>windowWidth/1.2)&&(mouseY<windowWidth/1.2+windowWidth/4.8)){
        
         station=1;
     }
     //Paketfach aktiv
-    if ((count==4)&&(mouseX>windowWidth/7)&&(mouseX<windowWidth/7+200)&&(mouseY>windowWidth/1.2)&&(mouseY<windowWidth/1.2+400)){
+    if ((count==4)&&(mouseX>windowWidth/7)&&(mouseX<windowWidth/7+windowWidth/9.6)&&(mouseY>windowWidth/1.2)&&(mouseY<windowWidth/1.2+windowWidth/4.8)){
         station=2;
     }
     
     //Alles inaktiv
-    if ((count==4)&&((mouseX<windowWidth/7)||(mouseX>windowWidth/7+400)||(mouseY<windowWidth/1.2)||(mouseY>windowWidth/1.2+400))){
+    if ((count==4)&&((mouseX<windowWidth/7)||(mouseX>windowWidth/7+windowWidth/4.8)||(mouseY<windowWidth/1.2)||(mouseY>windowWidth/1.2+windowWidth/4.8))){
         station=0;
     }   
-   // let dasRadHover = new Background(radhover,windowWidth/2.48,windowWidth/0.85,380,200);
-    //let Tasche = new Background(bag,windowWidth/4,windowWidth/0.9,180,300);
     //Rad beim hovern
-    if ((count==4)&&(mouseX>windowWidth/2.48)&&(mouseX<windowWidth/2.48+380)&&(mouseY>windowWidth/0.85)&&(mouseY<windowWidth/0.85+200)){
+    if ((count==4)&&(mouseX>windowWidth/2.48)&&(mouseX<windowWidth/2.48+windowWidth/5.05)&&(mouseY>windowWidth/0.85)&&(mouseY<windowWidth/0.85+windowWidth/9.6)){
         transport=1;
     }
     //Tasche beim hovern
-    if ((count==4)&&(mouseX>windowWidth/4)&&(mouseX<windowWidth/4+180)&&(mouseY>windowWidth/0.9)&&(mouseY<windowWidth/0.9+300)){
+    if ((count==4)&&(mouseX>windowWidth/4)&&(mouseX<windowWidth/4+windowWidth/10.6)&&(mouseY>windowWidth/0.9)&&(mouseY<windowWidth/0.9+windowWidth/6.4)){
         transport=2;
       } 
-      if ((count==4)&&((mouseX<windowWidth/4)||(mouseX>windowWidth/4+560)||(mouseY<windowWidth/0.9)||(mouseY>windowWidth/0.9+300))){
+      if ((count==4)&&((mouseX<windowWidth/4)||(mouseX>windowWidth/4+windowWidth/3.43)||(mouseY<windowWidth/0.9)||(mouseY>windowWidth/0.9+windowWidth/6.4))){
         transport=0;
     } 
 
