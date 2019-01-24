@@ -16,6 +16,8 @@ let text3 = loadImage("Texte/EinPaketbestellen.png");
 let text4 = loadImage("Texte/nachricht.png");
 let text5 = loadImage("Texte/dieStation.png");
 let text6 = loadImage("Texte/lastMile.png");
+let text7 = loadImage("Texte/Mobilität.png");
+let text8 = loadImage("Texte/Abstract.png");
 
 //let gif = loadImage("Schienen.gif");
 
@@ -77,12 +79,14 @@ let abholung = new Background (hintergrundAbholung, 0,0,windowWidth,windowWidth*
 let bkasten = new Background(buttonkasten,windowWidth/1.74,windowWidth/0.6,windowWidth/4.6,windowWidth/20);
 
 //Texte
-let einleitung = new Background(text1,windowWidth/9,windowWidth/13,430,300);
-let problem = new Background(text2,windowWidth/9,windowWidth/1.4,650,300);
-let einPaketBestellen = new Background(text3,windowWidth/4,windowWidth/0.8,930,800);
-let Nachricht = new Background(text4,windowWidth/5.5,windowWidth/8,735,928);
-let DieStation = new Background(text5,windowWidth/2.5,windowWidth/1.2,627,371);
-let LastMile = new Background(text6,windowWidth/7,windowWidth/0.78,1135,197);
+let einleitung = new Background(text1,windowWidth/9,windowWidth/13,windowWidth/4.465,windowWidth/6.4);
+let problem = new Background(text2,windowWidth/9,windowWidth/1.4,windowWidth/2.954,windowWidth/6.4);
+let einPaketBestellen = new Background(text3,windowWidth/4,windowWidth/0.8,windowWidth/2.06,windowWidth/2.4);
+let Nachricht = new Background(text4,windowWidth/5.5,windowWidth/8,windowWidth/2.612,windowWidth/2.07);
+let DieStation = new Background(text5,windowWidth/2.5,windowWidth/1.2,windowWidth/3.06,windowWidth/5.17);
+let LastMile = new Background(text6,windowWidth/7,windowWidth/0.78,windowWidth/1.692,windowWidth/9.746);
+let mobil = new Background(text7,windowWidth/7,windowWidth/4,windowWidth/1.67,windowWidth/6.91);
+let abstract = new Background(text8,windowWidth/7,windowWidth/1.5,windowWidth/1.649,windowWidth/7.9);
 
 //Bilder
 let umschlagslagerbild = new Background(umschlagslager, windowWidth/9,windowWidth/13,430,300);
@@ -136,18 +140,22 @@ function mouseClicked(){
     //zurück zum Start (Mobilität für uns)
     if ((count==2)&&(mouseX>windowWidth/20)&&(mouseX<windowWidth/20+windowWidth/15)&&(mouseY>windowWidth/6)&&(mouseY<windowWidth/6+windowWidth/15)){
         count =0; 
+        createCanvas(windowWidth,windowWidth*2);
     }
     //zurück zum Start (Der Hauptumschlagspunkt)
     if ((count==3)&&(mouseX>windowWidth/1.1)&&(mouseX<windowWidth/1.1+windowWidth/15)&&(mouseY>windowWidth/15)&&(mouseY<windowWidth/15+windowWidth/15)){
         count =0; 
+        createCanvas(windowWidth,windowWidth*2);
     }
      //zurück zum Start (Die Abholung)
      if ((count==4)&&(mouseX>windowWidth/8)&&(mouseX<windowWidth/8+windowWidth/15)&&(mouseY>windowWidth/60)&&(mouseY<windowWidth/60+windowWidth/15)){
         count =0; 
+        createCanvas(windowWidth,windowWidth*2);
     }
     //zurück zum Start (Der Kunde)
     if ((count==5)&&(mouseX>windowWidth/7)&&(mouseX<windowWidth/7+windowWidth/15)&&(mouseY>windowWidth/1.2)&&(mouseY<windowWidth/1.2+windowWidth/15)){
         count =0; 
+        createCanvas(windowWidth,windowWidth*2);
     }
     //Paket erscheint
     if ((count==4)&&(mouseX>windowWidth/7)&&(mouseX<windowWidth/7+200)&&(mouseY>windowWidth/1.2)&&(mouseY<windowWidth/1.2+400)){
@@ -177,6 +185,8 @@ function draw(){
 
     if (count==2){   //Mobilität für uns
     backMob.display();
+    mobil.display();
+    abstract.display();
     }
 
     if (count==3){   //Der Hauptumschagspunkt
@@ -243,7 +253,7 @@ function draw(){
     if (count==5){   //Unser Endnutzer//Unser Kunde
         backKunde.display(); 
     }
-    console.log(station);
+    console.log(windowWidth);
     
 
     }
