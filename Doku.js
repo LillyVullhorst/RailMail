@@ -6,6 +6,11 @@ let hintergrundMob = loadImage("Hintergrund/FahrplanDokuMobilität.png");
 let hintergrundtech = loadImage("Hintergrund/FahrplanDokuTechnik.png");
 let hintergrundKunde =loadImage("Hintergrund/FahrplanDokuKunden.png");
 let hintergrundAbholung = loadImage("Hintergrund/Die Abholung.png");
+let topBar= loadImage("Hintergrund/top.png");
+let topMan = loadImage("Hintergrund/topbarManagement.png")
+let topTech = loadImage("Hintergrund/topbarTech.png");
+let topDesign = loadImage("Hintergrund/topbarDesign.png");
+let topShadow = loadImage("Hintergrund/shadow.png");
 
 let buttonkasten = loadImage("ButtonHilfe.png");
 
@@ -18,6 +23,11 @@ let text5 = loadImage("Texte/dieStation.png");
 let text6 = loadImage("Texte/lastMile.png");
 let text7 = loadImage("Texte/Mobilität.png");
 let text8 = loadImage("Texte/Abstract.png");
+
+let text9 = loadImage("Texte/Hauptumschlagspunkt.png");
+let text10 = loadImage("Texte/derWagon.png");
+let text11 = loadImage("Texte/techStation.png");
+
 
 //let gif = loadImage("Schienen.gif");
 
@@ -33,6 +43,13 @@ let radhover = loadImage("Bilder/Transportfahrradhover.png");
 let bag =loadImage("Bilder/Transporttasche.png");
 let baghover =loadImage("Bilder/Transporttaschehover.png");
 
+let train = loadImage("Bilder/Zug.png");
+let belt = loadImage("Bilder/Fließbandsegmente.png");
+let waggon = loadImage("Bilder/Wagonaußen.png");
+let innerWaggon = loadImage("Bilder/obereWagenEbene.png");
+let stationEbene = loadImage("Bilder/Paketstationoben.png");
+
+
 
 
 let count = 0;
@@ -40,6 +57,8 @@ let station = 0;
 let transport =0;
 let pack = 0;
 
+//Aufklappen der Navigation 
+let manY = 350;
 
 /* 
 var gif = new GIF({
@@ -75,21 +94,30 @@ let backMob = new Background(hintergrundMob, 0,0,windowWidth,windowWidth*2);
 let backtech = new Background(hintergrundtech, 0,0,windowWidth,windowWidth*3.25);
 let backKunde = new Background(hintergrundKunde,0,0,windowWidth,windowWidth*3.25);
 let abholung = new Background (hintergrundAbholung, 0,0,windowWidth,windowWidth*1.5);
+let topNav = new Background(topBar,0,0,windowWidth,windowWidth/21.5);
+let manNav = new Background(topMan,0,windowWidth/manY,windowWidth,windowWidth/21.5);
+let techNav = new Background(topTech,0,windowWidth/100,windowWidth,windowWidth/21.5);
+let designNav = new Background(topDesign,0,windowWidth/60,windowWidth,windowWidth/21.5);
+let shadowNav = new Background(topShadow,0,windowWidth/16.5,windowWidth,windowWidth/21.5);
 
-let bkasten = new Background(buttonkasten,windowWidth/1.9,windowWidth/0.617,windowWidth/4.6,windowWidth/20);
+let bkasten = new Background(buttonkasten,windowWidth/25,windowWidth/8,windowWidth/15,windowWidth/15);
 
 //Texte
-let einleitung = new Background(text1,windowWidth/9,windowWidth/13,windowWidth/4.465,windowWidth/6.4);
+let einleitung = new Background(text1,windowWidth/9,windowWidth/8,windowWidth/4.465,windowWidth/6.4);
 let problem = new Background(text2,windowWidth/9,windowWidth/1.4,windowWidth/2.954,windowWidth/6.4);
 let einPaketBestellen = new Background(text3,windowWidth/4,windowWidth/0.8,windowWidth/2.06,windowWidth/2.4);
-let Nachricht = new Background(text4,windowWidth/5.5,windowWidth/8,windowWidth/2.612,windowWidth/2.07);
-let DieStation = new Background(text5,windowWidth/2.5,windowWidth/1.2,windowWidth/3.06,windowWidth/5.17);
+let Nachricht = new Background(text4,windowWidth/4.98,windowWidth/6,windowWidth/2.612,windowWidth/2.07);
+let DieStation = new Background(text5,windowWidth/2.5,windowWidth/1.283,windowWidth/2.99,windowWidth/3.76);
 let LastMile = new Background(text6,windowWidth/7,windowWidth/0.78,windowWidth/1.692,windowWidth/9.746);
-let mobil = new Background(text7,windowWidth/7,windowWidth/4,windowWidth/1.67,windowWidth/6.91);
-let abstract = new Background(text8,windowWidth/7,windowWidth/1.5,windowWidth/1.649,windowWidth/7.9);
+let mobil = new Background(text7,windowWidth/3.2,windowWidth/4,windowWidth/2.4,windowWidth/3.24);
+let abstract = new Background(text8,windowWidth/3.2,windowWidth/1.4,windowWidth/2.49,windowWidth/6.9);
+
+let umschlagspunkt = new Background(text9,windowWidth/3.4,windowWidth/5,windowWidth/2.93,windowWidth/3.1);
+let wagonText = new Background (text10,windowWidth/4,windowWidth/0.82,windowWidth/2.9,windowWidth/2.43);
+let innerStation = new Background(text11,windowWidth/3,windowWidth/0.43,windowWidth/2.9,windowWidth/3.3);
 
 //Bilder
-let umschlagslagerbild = new Background(umschlagslager, windowWidth/9,windowWidth/13,windowWidth/4.465,windowWidth/6.4);
+let umschlagslagerbild = new Background(umschlagslager, windowWidth/3.4,windowWidth/1.8,windowWidth/2.86,windowWidth/4.8);
 let dasTeam = new Background(team,windowWidth/9,windowWidth/3,windowWidth/4.27,windowWidth/6.4);
 let stationAus = new Background(station1,windowWidth/7,windowWidth/1.2,windowWidth/4.8,windowWidth/4.8);
 let stationAn = new Background(station2,windowWidth/7,windowWidth/1.2,windowWidth/4.8,windowWidth/4.8);
@@ -99,13 +127,19 @@ let dasRad = new Background(rad,windowWidth/2.48,windowWidth/0.85,windowWidth/5.
 let dasRadHover = new Background(radhover,windowWidth/2.48,windowWidth/0.85,windowWidth/5.05,windowWidth/9.6);
 let Tasche = new Background(bag,windowWidth/4,windowWidth/0.9,windowWidth/10.67,windowWidth/6.4);
 let Taschehover = new Background (baghover,windowWidth/4,windowWidth/0.9,windowWidth/10.10,windowWidth/6.4);
+
+let derZug = new Background(train,windowWidth/15.5,windowWidth/15,windowWidth/30.5,windowWidth/4.03);
+let Fließband = new Background (belt,windowWidth/1.5,windowWidth/3.8,windowWidth/3.8,windowWidth/3.75);
+let derWagon = new Background(waggon,windowWidth/3.2,windowWidth/0.98,windowWidth/2.3,windowWidth/3.3);
+let wagonEbene = new Background(innerWaggon,windowWidth/5.2,windowWidth/0.6,windowWidth/2.3,windowWidth/4.26);
+let inStation = new Background(stationEbene,windowWidth/3,windowWidth/0.38,windowWidth/1.86,windowWidth/3.575);
 //let Schienen = new Background(gif,windowWidth/9,windowWidth/1,500,250)
 
 //Button-Rechnungen
 //x=je größer je näher ist die links , y = je größer je weiter ist die oben
 function mouseClicked(){    
-    //->Mobilität für uns            
-    if ((count==0)&&(mouseX>windowWidth/1.17)&&(mouseX<windowWidth/1.17+windowWidth/15)&&(mouseY>windowWidth/6.15)&&(mouseY<windowWidth/6.15+windowWidth/15)){
+    //->Mobilität für uns  (      
+    if ((count==0)&&(mouseX>windowWidth/1.13)&&(mouseX<windowWidth/1.13+windowWidth/15)&&(mouseY>windowWidth/4.7)&&(mouseY<windowWidth/4.7+windowWidth/15)){
         count =2; 
         document.body.scrollTop = 0;
         document.documentElement.scrollTop = 0;
@@ -149,12 +183,12 @@ function mouseClicked(){
         createCanvas(windowWidth,windowWidth*2);
     }
      //zurück zum Start (Die Abholung)
-     if ((count==4)&&(mouseX>windowWidth/8)&&(mouseX<windowWidth/8+windowWidth/15)&&(mouseY>windowWidth/60)&&(mouseY<windowWidth/60+windowWidth/15)){
+     if ((count==4)&&(mouseX>windowWidth/8)&&(mouseX<windowWidth/8+windowWidth/15)&&(mouseY>windowWidth/16)&&(mouseY<windowWidth/16+windowWidth/15)){
         count =0; 
         createCanvas(windowWidth,windowWidth*2);
     }
-    //zurück zum Start (Der Kunde)
-    if ((count==5)&&(mouseX>windowWidth/7)&&(mouseX<windowWidth/7+windowWidth/15)&&(mouseY>windowWidth/1.2)&&(mouseY<windowWidth/1.2+windowWidth/15)){
+    //zurück zum Start (Der Kunde)(buttonkasten,windowWidth/25,windowWidth/8,windowWidth/15,windowWidth/15);
+    if ((count==5)&&(mouseX>windowWidth/25)&&(mouseX<windowWidth/25+windowWidth/15)&&(mouseY>windowWidth/8)&&(mouseY<windowWidth/8+windowWidth/15)){
         count =0; 
         createCanvas(windowWidth,windowWidth*2);
     }
@@ -170,7 +204,11 @@ function mouseClicked(){
 
 function draw(){
     clear();
-   
+    
+    if((mouseX>0)&&(mouseX<windowWidth)&&(mouseY>windowWidth/350)&&(mouseY<windowWidth/100)){
+        manY=manY-100;
+        manNav.display();
+    }
   
  
     if (count==0){  //Einleitung
@@ -180,7 +218,7 @@ function draw(){
     //Schienen.display();
     dasTeam.display();
     einPaketBestellen.display();
-    bkasten.display();
+   
    
     }
 
@@ -193,6 +231,15 @@ function draw(){
     if (count==3){   //Der Hauptumschagspunkt
         backtech.display();
         umschlagslagerbild.display(); 
+        umschlagspunkt.display();
+        derZug.display();
+        Fließband.display();
+        derWagon.display();
+        wagonText.display();
+        wagonEbene.display()
+        innerStation.display();
+        inStation.display();
+
     }
     //Die Stationsinteraktion
     //Bildschirm aktiv
@@ -231,7 +278,7 @@ function draw(){
         dasRad.display();
         Tasche.display();
         LastMile.display();
-      
+        
         if (station==1){
             stationAn.display();
         }
@@ -251,8 +298,15 @@ function draw(){
 
     if (count==5){   //Unser Endnutzer//Unser Kunde
         backKunde.display(); 
+        bkasten.display();
     }
-    console.log(windowWidth);
-    
+    console.log(manY);
+     //Navigation
+     shadowNav.display();
+    designNav.display();
+    techNav.display();
+    manNav.display();
+    topNav.display();
+  
 
     }
