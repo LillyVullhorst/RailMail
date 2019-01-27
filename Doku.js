@@ -100,7 +100,7 @@ let techNav = new Background(topTech,0,windowWidth/100,windowWidth,windowWidth/2
 let designNav = new Background(topDesign,0,windowWidth/60,windowWidth,windowWidth/21.5);
 let shadowNav = new Background(topShadow,0,windowWidth/16.5,windowWidth,windowWidth/21.5);
 
-let bkasten = new Background(buttonkasten,windowWidth/25,windowWidth/8,windowWidth/15,windowWidth/15);
+let bkasten = new Background(buttonkasten,windowWidth/1.13,windowWidth/0.46,windowWidth/15,windowWidth/15);
 
 //Texte
 let einleitung = new Background(text1,windowWidth/9,windowWidth/8,windowWidth/4.465,windowWidth/6.4);
@@ -165,13 +165,13 @@ function mouseClicked(){
         document.body.scrollTop = 0;
         document.documentElement.scrollTop = 0;
     }
-    
     //Unsere Kunden
     if ((count==0)&&(mouseX>windowWidth/1.1)&&(mouseX<windowWidth/1.1+windowWidth/15)&&(mouseY>windowWidth/1)&&(mouseY<windowWidth/1+windowWidth/15)){
         count =5; 
         document.body.scrollTop = 0;
         document.documentElement.scrollTop = 0;
     }
+
     //zurück zum Start (Mobilität für uns)
     if ((count==2)&&(mouseX>windowWidth/20)&&(mouseX<windowWidth/20+windowWidth/15)&&(mouseY>windowWidth/6)&&(mouseY<windowWidth/6+windowWidth/15)){
         count =0; 
@@ -187,11 +187,27 @@ function mouseClicked(){
         count =0; 
         createCanvas(windowWidth,windowWidth*2);
     }
-    //zurück zum Start (Der Kunde)(buttonkasten,windowWidth/25,windowWidth/8,windowWidth/15,windowWidth/15);
+    //zurück zum Start (Der Kunde)
     if ((count==5)&&(mouseX>windowWidth/25)&&(mouseX<windowWidth/25+windowWidth/15)&&(mouseY>windowWidth/8)&&(mouseY<windowWidth/8+windowWidth/15)){
         count =0; 
         createCanvas(windowWidth,windowWidth*2);
     }
+
+    //Link Hauptumschlagspunkt->Management
+    if ((count==3)&&(mouseX>windowWidth/1.13)&&(mouseX<windowWidth/1.13+windowWidth/15)&&(mouseY>windowWidth/1.25)&&(mouseY<windowWidth/1.25+windowWidth/15)){
+        count =5; 
+        createCanvas(windowWidth,windowWidth*2);
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+    }
+    //Link Hauptumschlagspunkt->die Abholung 
+    if ((count==3)&&(mouseX>windowWidth/1.13)&&(mouseX<windowWidth/1.13+windowWidth/15)&&(mouseY>windowWidth/0.46)&&(mouseY<windowWidth/0.46+windowWidth/15)){
+        count =4; 
+        createCanvas(windowWidth,windowWidth*1.5);
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+    }
+
     //Paket erscheint
     if ((count==4)&&(mouseX>windowWidth/7)&&(mouseX<windowWidth/7+windowWidth/9.6)&&(mouseY>windowWidth/1.2)&&(mouseY<windowWidth/1.2+windowWidth/4.8)){
         station=2;
@@ -239,6 +255,7 @@ function draw(){
         wagonEbene.display()
         innerStation.display();
         inStation.display();
+        bkasten.display();
 
     }
     //Die Stationsinteraktion
@@ -298,7 +315,7 @@ function draw(){
 
     if (count==5){   //Unser Endnutzer//Unser Kunde
         backKunde.display(); 
-        bkasten.display();
+        
     }
     console.log(manY);
      //Navigation
