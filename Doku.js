@@ -28,6 +28,9 @@ let text9 = loadImage("Texte/Hauptumschlagspunkt.png");
 let text10 = loadImage("Texte/derWagon.png");
 let text11 = loadImage("Texte/techStation.png");
 
+let text12 = loadImage("Texte/derKunde.png");
+let text13 = loadImage("Texte/derEndkunde.png");
+
 
 //let gif = loadImage("Schienen.gif");
 
@@ -115,6 +118,9 @@ let abstract = new Background(text8,windowWidth/3.2,windowWidth/1.4,windowWidth/
 let umschlagspunkt = new Background(text9,windowWidth/3.4,windowWidth/5,windowWidth/2.93,windowWidth/3.1);
 let wagonText = new Background (text10,windowWidth/4,windowWidth/0.82,windowWidth/2.9,windowWidth/2.43);
 let innerStation = new Background(text11,windowWidth/3,windowWidth/0.43,windowWidth/2.9,windowWidth/3.3);
+
+let customer = new Background(text12,windowWidth/5.2,windowWidth/4,windowWidth/1.4,windowWidth/2.75);
+let endcustomer = new Background(text13,windowWidth/5.2,windowWidth/1.45,windowWidth/2.94,windowWidth/3.51);
 
 //Bilder
 let umschlagslagerbild = new Background(umschlagslager, windowWidth/3.4,windowWidth/1.8,windowWidth/2.86,windowWidth/4.8);
@@ -315,7 +321,8 @@ function draw(){
 
     if (count==5){   //Unser Endnutzer//Unser Kunde
         backKunde.display(); 
-        
+        customer.display();
+        endcustomer.display();
     }
     console.log(manY);
      //Navigation
