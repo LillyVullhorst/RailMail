@@ -52,6 +52,7 @@ let belt = loadImage("Bilder/Fließbandsegmente.png");
 let waggon = loadImage("Bilder/Wagonaußen.png");
 let innerWaggon = loadImage("Bilder/obereWagenEbene.png");
 let stationEbene = loadImage("Bilder/Paketstationoben.png");
+let paketZug = loadImage("Bilder/Paket2.png");
 
 let map = loadImage("Bilder/Abdeckungskarte.png");
 
@@ -144,6 +145,7 @@ let Fließband = new Background (belt,windowWidth/1.5,windowWidth/3.8,windowWidt
 let derWagon = new Background(waggon,windowWidth/3.2,windowWidth/0.96,windowWidth/2.3,windowWidth/3.3);
 let wagonEbene = new Background(innerWaggon,windowWidth/5.2,windowWidth/0.57,windowWidth/2.3,windowWidth/4.26);
 let inStation = new Background(stationEbene,windowWidth/3,windowWidth/0.38,windowWidth/1.86,windowWidth/3.575);
+let paketLadung = new Background(paketZug,windowWidth/3.3,windowWidth/1.5,windowWidth/42.326,windowWidth/44);
 
 let abdeckung = new Background(map,windowWidth/5.2,windowWidth/0.7,windowWidth/2.03,windowWidth/2.46);
 //let Schienen = new Background(gif,windowWidth/9,windowWidth/1,500,250)
@@ -279,6 +281,16 @@ function draw(){
             derZug.Y=scrollPos+50;
             derZug.display();
             }
+        if (scrollPos >= windowWidth/3){
+            paketLadung.display();
+            if (paketLadung.X>=windowWidth/13.4303){
+            paketLadung.X=paketLadung.X-10;
+            }
+            if (scrollPos >= windowWidth/1.5){
+                
+                paketLadung.Y=scrollPos+60;
+            }
+        }
         
     
        
@@ -288,6 +300,7 @@ function draw(){
         wagonEbene.display()
         innerStation.display();
         inStation.display();
+        
         bkasten.display();
 
     }
