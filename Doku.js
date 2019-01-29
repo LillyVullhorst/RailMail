@@ -66,7 +66,7 @@ let pack = 0;
 
 //Aufklappen der Navigation 
 let manY = 350;
-
+var zugY = windowWidth/15;
 /* 
 var gif = new GIF({
     workers: 2,
@@ -139,7 +139,7 @@ let dasRadHover = new Background(radhover,windowWidth/2.48,windowWidth/0.85,wind
 let Tasche = new Background(bag,windowWidth/4,windowWidth/0.9,windowWidth/10.67,windowWidth/6.4);
 let Taschehover = new Background (baghover,windowWidth/4,windowWidth/0.9,windowWidth/10.10,windowWidth/6.4);
 
-//var derZug = new Background(train,windowWidth/15.5,windowWidth/15,windowWidth/30.5,windowWidth/4.03);
+var derZug = new Background(train,windowWidth/15.5,zugY,windowWidth/30.5,windowWidth/4.03);
 let Fließband = new Background (belt,windowWidth/1.5,windowWidth/3.8,windowWidth/3.8,windowWidth/3.75);
 let derWagon = new Background(waggon,windowWidth/3.2,windowWidth/0.96,windowWidth/2.3,windowWidth/3.3);
 let wagonEbene = new Background(innerWaggon,windowWidth/5.2,windowWidth/0.57,windowWidth/2.3,windowWidth/4.26);
@@ -231,7 +231,14 @@ function mouseClicked(){
 }
 jQuery(document).ready(function(){
 var zOffset= jQuery("nav").offset().top;
-alert(zOffset);
+//alert(zOffset);
+jQuery(window).scroll(function(){
+    scrollPos = jQuery(window).scrollTop();
+    if (scrollPos >=zOffset){
+ zugY=scrollPos;
+ }
+});
+
 });
 
 
