@@ -122,7 +122,7 @@ let abstract = new Background(text8,windowWidth/3.2,windowWidth/1.32,windowWidth
 let umschlagspunkt = new Background(text9,windowWidth/3.4,windowWidth/5,windowWidth/2.93,windowWidth/3.1);
 let wagonText = new Background (text10,windowWidth/4,windowWidth/0.78,windowWidth/2.9,windowWidth/2.43);
 let innerStation = new Background(text11,windowWidth/3,windowWidth/0.43,windowWidth/2.9,windowWidth/3.3);
-
+var derZug = new Background(train,windowWidth/15.5,zugY,windowWidth/30.5,windowWidth/4.03);
 let customer = new Background(text12,windowWidth/5.2,windowWidth/3.5,windowWidth/1.4,windowWidth/2.75);
 let endcustomer = new Background(text13,windowWidth/5.2,windowWidth/1.27,windowWidth/2.94,windowWidth/3.51);
 let ort = new Background(text14,windowWidth/5.2,windowWidth/0.76,windowWidth/1.45,windowWidth/9.8);
@@ -139,7 +139,7 @@ let dasRadHover = new Background(radhover,windowWidth/2.48,windowWidth/0.85,wind
 let Tasche = new Background(bag,windowWidth/4,windowWidth/0.9,windowWidth/10.67,windowWidth/6.4);
 let Taschehover = new Background (baghover,windowWidth/4,windowWidth/0.9,windowWidth/10.10,windowWidth/6.4);
 
-var derZug = new Background(train,windowWidth/15.5,zugY,windowWidth/30.5,windowWidth/4.03);
+
 let Fließband = new Background (belt,windowWidth/1.5,windowWidth/3.8,windowWidth/3.8,windowWidth/3.75);
 let derWagon = new Background(waggon,windowWidth/3.2,windowWidth/0.96,windowWidth/2.3,windowWidth/3.3);
 let wagonEbene = new Background(innerWaggon,windowWidth/5.2,windowWidth/0.57,windowWidth/2.3,windowWidth/4.26);
@@ -229,14 +229,13 @@ function mouseClicked(){
         pack=1;
     }
 }
+let zOffset= jQuery("nav").offset().top;
 jQuery(document).ready(function(){
-var zOffset= jQuery("nav").offset().top;
+
 //alert(zOffset);
 jQuery(window).scroll(function(){
     scrollPos = jQuery(window).scrollTop();
-    if (scrollPos >=zOffset){
- zugY=scrollPos;
- }
+    
 });
 
 });
@@ -274,7 +273,12 @@ function draw(){
         backtech.display();
         umschlagslagerbild.display(); 
         umschlagspunkt.display();
-        derZug.display();
+       
+        if (scrollPos >= zOffset){
+            
+            derZug.Y=scrollPos+50;
+            derZug.display();
+            }
         
     
        
@@ -349,7 +353,7 @@ function draw(){
         abdeckung.display();
         ort.display();
     }
-    console.log(manY);
+    console.log(zugY);
      //Navigation
      shadowNav.display();
     designNav.display();
