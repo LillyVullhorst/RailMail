@@ -66,28 +66,61 @@ void loop() // Loop
 
     tasterstatus = digitalRead(taster); //Hier wird der Pin7 ausgelesen (Befehl:digitalRead). Das Ergebnis wird unter der Variable „tasterstatus“ mit dem Wert „HIGH“ für 5Volt oder „LOW“ für 0Volt gespeichert.
     trainPing = digitalRead (trainSensor) ; // Das gegenwärtige Signal am Sensor wird ausgelesen
-  
- 
+    
     if (tasterstatus == LOW && restart == true)
     {
     Serial.print("Start");
+    
     aPowerEnabled = true; 
     start = true;
     restart = false;
     }
+       
+    if (start == true && trainPing == LOW){
+        
+           //digitalWrite(RELAY4, HIGH);
+           abkuppeln = true;
+           stage = 1;      
+
+    }
+
+    if (start == true && stage == 1 ){
+           
+           Serial.print("Stage1");
+           delay(3000);
+           aPowerEnabled = false;
+           digitalWrite(RELAY4, HIGH);
+           abkuppeln = true;
+           delay(3000);
+           
+           stage = 2;           
+      }
+
+          if (start == true && stage == 2 ){
+            
+           delay(3000);
+           Serial.print("Stage2");
+
+           GleisA = true;
+           
+           abkuppeln = false;
+           aPowerEnabled = true;
+           stage = 3;           
+      }
+    
     
     if(abkuppeln == true)
     {       Serial.print("Abkuppeln");
             mySwitch.send(5678, 24); // Der 433mhz Sender versendet die Dezimalzahl „5678“
             delay (50); // 50 Millisekunden Pause
-            abkuppeln = false;
+            
     }
 
     if(ankuppeln == true)
     {       Serial.print("Ankuppeln");
              mySwitch.send(1234, 24); // Der 433mhz Sender versendet die Dezimalzahl „1234“
              delay (50); // 50 Millisekunden Pause
-             ankuppeln = false;
+             
     }
 
 
@@ -108,44 +141,14 @@ void loop() // Loop
       
     }
     
-    if (start == true){
-        
-        if (trainPing == LOW){
-              delay (2000);
-              abkuppeln = true;
-              aPowerEnabled = false;
-              stage = 2;
-              
-              }
-              
-         if (stage == 2){
-            delay(5000);
-            servo.write(121);
-            
-            stage = 3;    
-          }
-          
-         if (stage == 3){
-            
-            delay(1000);
-            
-            //abkuppeln = false;   
-        }
-      }
-    
-
-   
-
-    
     /// Servo
     if (GleisA == true){
     // scan from 0 to 180 degrees
-    for(angle = 10; angle < 121; angle++)  
-    {                                  
-      servo.write(angle);               
-      delay(15);                   
-    }
-    }
+    delay(1000);
+    servo.write(115);
+    }else{
+    servo.write(10);
+      }
 
      if (GleisB == true){
     // scan back from 180 to 0 degrees
