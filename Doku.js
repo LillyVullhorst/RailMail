@@ -31,6 +31,7 @@ let text11 = loadImage("Texte/techStation.png");
 let text12 = loadImage("Texte/derKunde.png");
 let text13 = loadImage("Texte/derEndkunde.png");
 let text14 = loadImage("Texte/Standort.png");
+let text15 = loadImage("Texte/Standortbestimmung.png");
 
 
 //let gif = loadImage("Schienen.gif");
@@ -53,6 +54,9 @@ let waggon = loadImage("Bilder/Wagonaußen.png");
 let innerWaggon = loadImage("Bilder/obereWagenEbene.png");
 let stationEbene = loadImage("Bilder/Paketstationoben.png");
 let paketZug = loadImage("Bilder/Paket2.png");
+let passenger = loadImage("Bilder/Mensch.png");
+let beaconOn = loadImage("Bilder/BeaconAn.png");
+let beaconOff = loadImage("Bilder/BeaconAus.png");
 
 let map = loadImage("Bilder/Abdeckungskarte.png");
 
@@ -64,6 +68,8 @@ let count = 0;
 let station = 0; 
 let transport =0;
 let pack = 0;
+let lieferung = 0;
+let theTrain = 0;
 
 //Aufklappen der Navigation 
 let manY = 350;
@@ -99,7 +105,7 @@ class Background{
 //Hintergrund
 let back1 = new Background(hintergrund, 0,0,windowWidth,windowWidth*2);
 let backMob = new Background(hintergrundMob, 0,0,windowWidth,windowWidth*2);
-let backtech = new Background(hintergrundtech, 0,0,windowWidth,windowWidth*3.25);
+let backtech = new Background(hintergrundtech, 0,0,windowWidth,windowWidth*4.23);
 let backKunde = new Background(hintergrundKunde,0,0,windowWidth,windowWidth*3.76);
 let abholung = new Background (hintergrundAbholung, 0,0,windowWidth,windowWidth*1.5);
 let topNav = new Background(topBar,0,0,windowWidth,windowWidth/21.5);
@@ -108,7 +114,7 @@ let techNav = new Background(topTech,0,windowWidth/100,windowWidth,windowWidth/2
 let designNav = new Background(topDesign,0,windowWidth/60,windowWidth,windowWidth/21.5);
 let shadowNav = new Background(topShadow,0,windowWidth/16.5,windowWidth,windowWidth/21.5);
 
-let bkasten = new Background(buttonkasten,windowWidth/1.13,windowWidth/0.46,windowWidth/15,windowWidth/15);
+let bkasten = new Background(buttonkasten,windowWidth/1.28,windowWidth/0.375,windowWidth/15,windowWidth/15);
 
 //Texte
 let einleitung = new Background(text1,windowWidth/2.6,windowWidth/3.48,windowWidth/4.465,windowWidth/6.4);
@@ -120,13 +126,15 @@ let LastMile = new Background(text6,windowWidth/7,windowWidth/0.78,windowWidth/1
 let mobil = new Background(text7,windowWidth/3.2,windowWidth/4,windowWidth/2.4,windowWidth/3.24);
 let abstract = new Background(text8,windowWidth/3.2,windowWidth/1.32,windowWidth/2.49,windowWidth/6.9);
 
-let umschlagspunkt = new Background(text9,windowWidth/3.4,windowWidth/5,windowWidth/2.93,windowWidth/3.1);
+let umschlagspunkt = new Background(text9,windowWidth/3.45,windowWidth/5,windowWidth/2.93,windowWidth/3.1);
 let wagonText = new Background (text10,windowWidth/4,windowWidth/0.78,windowWidth/2.9,windowWidth/2.43);
 let innerStation = new Background(text11,windowWidth/3,windowWidth/0.43,windowWidth/2.9,windowWidth/3.3);
 var derZug = new Background(train,windowWidth/15.5,zugY,windowWidth/30.5,windowWidth/4.03);
+
 let customer = new Background(text12,windowWidth/5.2,windowWidth/3.5,windowWidth/1.4,windowWidth/2.75);
 let endcustomer = new Background(text13,windowWidth/5.2,windowWidth/1.27,windowWidth/2.94,windowWidth/3.51);
 let ort = new Background(text14,windowWidth/5.2,windowWidth/0.76,windowWidth/1.45,windowWidth/9.8);
+var dieStandortbestimmung = new Background(text15,windowWidth/3,windowWidth/0.308,windowWidth/2.9,windowWidth/2.66);
 
 //Bilder
 let umschlagslagerbild = new Background(umschlagslager, windowWidth/3.4,windowWidth/1.8,windowWidth/2.86,windowWidth/4.8);
@@ -146,6 +154,9 @@ let derWagon = new Background(waggon,windowWidth/3.2,windowWidth/0.96,windowWidt
 let wagonEbene = new Background(innerWaggon,windowWidth/5.2,windowWidth/0.57,windowWidth/2.3,windowWidth/4.26);
 let inStation = new Background(stationEbene,windowWidth/3,windowWidth/0.38,windowWidth/1.86,windowWidth/3.575);
 let paketLadung = new Background(paketZug,windowWidth/3.3,windowWidth/1.5,windowWidth/42.326,windowWidth/44);
+let human = new Background(passenger,windowWidth/15.5,windowWidth/0.31,windowWidth/37.65,windowWidth/31.48);
+let signal = new Background(beaconOn,windowWidth/4.3,windowWidth/0.303,windowWidth/28.24,windowWidth/3.78);
+let noSignal = new Background(beaconOff,windowWidth/4.3,windowWidth/0.303,windowWidth/28.24,windowWidth/3.78);
 
 let abdeckung = new Background(map,windowWidth/5.2,windowWidth/0.7,windowWidth/2.03,windowWidth/2.46);
 //let Schienen = new Background(gif,windowWidth/9,windowWidth/1,500,250)
@@ -163,7 +174,7 @@ function mouseClicked(){
     //Der Hauptumschagspunkt
     if ((count==0)&&(mouseX>windowWidth/20)&&(mouseX<windowWidth/20+windowWidth/15)&&(mouseY>windowWidth/0.6)&&(mouseY<windowWidth/0.6+windowWidth/15)){
         count =3;
-        createCanvas(windowWidth,windowWidth*3.25); 
+        createCanvas(windowWidth,windowWidth*4.23); 
         document.body.scrollTop = 0;
         document.documentElement.scrollTop = 0;
     }
@@ -195,8 +206,9 @@ function mouseClicked(){
         createCanvas(windowWidth,windowWidth*2);
     }
     //zurück zum Start (Der Hauptumschlagspunkt)
-    if ((count==3)&&(mouseX>windowWidth/1.1)&&(mouseX<windowWidth/1.1+windowWidth/15)&&(mouseY>windowWidth/15)&&(mouseY<windowWidth/15+windowWidth/15)){
+    if ((count==3)&&(mouseX>windowWidth/1.15)&&(mouseX<windowWidth/1.15+windowWidth/15)&&(mouseY>windowWidth/15)&&(mouseY<windowWidth/15+windowWidth/15)){
         count =0; 
+        lieferung=0;
         createCanvas(windowWidth,windowWidth*2);
     }
      //zurück zum Start (Die Abholung)
@@ -272,28 +284,10 @@ function draw(){
     }
 
     if (count==3){   //Der Hauptumschagspunkt
+
         backtech.display();
         umschlagslagerbild.display(); 
         umschlagspunkt.display();
-       
-        if (scrollPos >= zOffset){
-            
-            derZug.Y=scrollPos+50;
-            derZug.display();
-            }
-        if (scrollPos >= windowWidth/3){
-            paketLadung.display();
-            if (paketLadung.X>=windowWidth/13.4303){
-            paketLadung.X=paketLadung.X-10;
-            }
-            if (scrollPos >= windowWidth/1.5){
-                
-                paketLadung.Y=scrollPos+60;
-            }
-        }
-        
-    
-       
         Fließband.display();
         derWagon.display();
         wagonText.display();
@@ -301,7 +295,57 @@ function draw(){
         innerStation.display();
         inStation.display();
         
-        bkasten.display();
+        
+        
+        noSignal.display();
+        
+       // bkasten.display();
+
+       if ((paketLadung.X >= windowWidth/1.28)&&(paketLadung.Y==windowWidth/0.375)){
+        lieferung=1;
+        }
+        if (human.X>=windowWidth/4.3){
+            signal.display();
+            dieStandortbestimmung.display();
+        }
+        if (scrollPos >= zOffset){
+            derZug.display();
+            //Zug fährt aus dem Bild
+            if (scrollPos >= windowWidth/0.27){
+                derZug.Y = derZug.Y+10;
+                theTrain=1;
+             }
+            //Der Zug fährt beim Scrollen
+            if ((scrollPos<windowWidth/0.27)&&(theTrain==0)){
+            derZug.Y=scrollPos+50;
+            
+           
+            }
+            
+            //Paket Ein-und Ausladen
+            if (scrollPos >= windowWidth/3){
+            paketLadung.display();
+                if ((paketLadung.X>=windowWidth/13.4303)&&(scrollPos <= windowWidth/0.4)&&(lieferung==0)){
+                paketLadung.X=paketLadung.X-10;
+                }
+                if ((scrollPos >= windowWidth/1.5)&&(scrollPos <= windowWidth/0.4)&&(lieferung==0)){  
+                paketLadung.Y=scrollPos+70;
+                }    
+            } 
+            if ((scrollPos >= windowWidth/0.4)&&(paketLadung.X<= windowWidth/1.28)&&(lieferung==0)){
+                paketLadung.X = paketLadung.X +10;
+                paketLadung.Y=windowWidth/0.375;
+            }
+
+            //Standortbestimmung
+            if (scrollPos >= windowWidth/0.339){
+                human.display();
+                if (human.X<=windowWidth/4.3){
+                    human.X=human.X+10;
+                }
+            }
+            
+        }
 
     }
     //Die Stationsinteraktion
@@ -366,7 +410,7 @@ function draw(){
         abdeckung.display();
         ort.display();
     }
-    console.log(zugY);
+    console.log(lieferung);
      //Navigation
      shadowNav.display();
     designNav.display();
