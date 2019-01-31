@@ -11,17 +11,22 @@ RCSwitch mySwitch = RCSwitch();
 boolean abkuppeln = false;
 boolean ankuppeln = false;
 
-int angle = 0;
+int angle = 10;
 int taster = 7; //Das Wort „taster“ steht jetzt für den Wert 7.
-int tasterstatus = 0; //Das Wort „tasterstatus“ als Variable
+int tasterstatus; //Das Wort „tasterstatus“ als Variable
 
+int trainSensor = 5; // Deklaration des Sensor-Eingangspin
+int trainPing; // Temporaere Variable
+int stage = 0;
+
+boolean restart = true;
+boolean start = false;
 boolean aPowerEnabled = false;
-boolean aButtonPressed = false;
 boolean bButtonPressed = false;
 boolean aDirectionChange = false;
-boolean apositionRail = false;
-boolean buttonsActive = true;
-   
+boolean GleisA = false;
+boolean GleisB = false;
+
 // Pin Belegungen
 
 #define PIN_BUTTON 6 
@@ -40,7 +45,9 @@ void setup() // Setup.
   pinMode(RELAY2, OUTPUT);
   pinMode(RELAY3, OUTPUT);
   pinMode(RELAY4, OUTPUT);
-
+  digitalWrite(RELAY2, HIGH);
+  digitalWrite(RELAY3, HIGH);
+  digitalWrite(RELAY4, HIGH);
 
 
   pinMode(PIN_BUTTON, INPUT_PULLUP); 
@@ -49,88 +56,106 @@ void setup() // Setup.
   servo.attach(4); //Servo an Pin 4
   servo.write(angle);
 
+  pinMode (trainSensor, INPUT) ; // Initialisierung Sensorpin
+  digitalWrite(trainSensor, HIGH); // Aktivierung interner Pull-Up Widerstand
+
 }
 void loop() // Loop
-{
+{ 
+  /// Start mit Taster (Pin / PullUp)
 
- if(buttonsActive == true){
-  ///RELAIS
-  if (digitalRead(PIN_BUTTON) == LOW) {                             // Wenn der Taster aktuell gedrückt wird, ...
-    aButtonPressed = true;                                          // merke dir, dass der Taster gedrückt wurde, ...
-    delay(10);                                                      // und warte 10 Millisekunden bis die Kontakte des Tasters vollstÃ¤ndig geschlossen sind.
-  }
-
-  if (digitalRead(PIN_BUTTON2) == LOW) {                             // Wenn der Taster aktuell gedrückt wird, ...
-    bButtonPressed = true;
-    delay(10);                                                      // und warte 10 Millisekunden bis die Kontakte des Tasters vollstÃ¤ndig geschlossen sind.
-  }
-
-  if (digitalRead(PIN_BUTTON) == HIGH && aButtonPressed == true) {  // Wenn der Taster nicht gedrÃ¼ckt wird, aber zuvor gedrÃ¼ckt wurde ...
-    aButtonPressed = false;                                         // vergesse, dass der Taster gedrÃ¼ckt wude.
+    tasterstatus = digitalRead(taster); //Hier wird der Pin7 ausgelesen (Befehl:digitalRead). Das Ergebnis wird unter der Variable „tasterstatus“ mit dem Wert „HIGH“ für 5Volt oder „LOW“ für 0Volt gespeichert.
+    trainPing = digitalRead (trainSensor) ; // Das gegenwärtige Signal am Sensor wird ausgelesen
     
-    if (aPowerEnabled == true) {                                      // Wenn die LED gerade leuchtet ...
-      digitalWrite(RELAY4, LOW);                                   // schalte die LED aus ...
-      aPowerEnabled = false;                                          // und merke dir, dass die LED gerade nicht leuchtet,
-    } else {                                                        // sonst ...
-      digitalWrite(RELAY4, HIGH);                                    // schalte die LED ein ...
-      aPowerEnabled = true;                                           // und merke dir, dass die LED gerade leuchtet.
-    }
-  }
-  }
-
-   if (digitalRead(PIN_BUTTON2) == HIGH && bButtonPressed == true) {  // Wenn der Taster nicht gedrückt wird, aber zuvor gedrückt wurde ...
-    bButtonPressed = false;                                         // vergesse, dass der Taster gedrÃ¼ckt wude.
-    
-    if (aDirectionChange == true) {                                      // Wenn die LED gerade leuchtet ...
-      digitalWrite(RELAY2, LOW);
-      digitalWrite(RELAY3, LOW);
-      aDirectionChange = false;                                          // und merke dir, dass die LED gerade nicht leuchtet,
-    } else {                                                        // sonst ...
-      digitalWrite(RELAY2, HIGH);
-      digitalWrite(RELAY3, HIGH);
-      aDirectionChange = true;                                           // und merke dir, dass die LED gerade leuchtet.
-    }
-  }
-  
-  /// Signal über Funkmodul, Steuerung des Elektromagneten
-
-    tasterstatus=digitalRead(taster); //Hier wird der Pin7 ausgelesen (Befehl:digitalRead). Das Ergebnis wird unter der Variable „tasterstatus“ mit dem Wert „HIGH“ für 5Volt oder „LOW“ für 0Volt gespeichert.
-    
-    if (tasterstatus == LOW)
+    if (tasterstatus == LOW && restart == true)
     {
-    abkuppeln = true;
+    Serial.print("Start");
     
-    }else
-    { 
-    ankuppeln = true;}
+    aPowerEnabled = true; 
+    start = true;
+    restart = false;
+    }
+       
+    if (start == true && trainPing == LOW){
+        
+           //digitalWrite(RELAY4, HIGH);
+           abkuppeln = true;
+           stage = 1;      
+
+    }
+
+    if (start == true && stage == 1 ){
+           
+           Serial.print("Stage1");
+           delay(3000);
+           aPowerEnabled = false;
+           digitalWrite(RELAY4, HIGH);
+           abkuppeln = true;
+           delay(3000);
+           
+           stage = 2;           
+      }
+
+          if (start == true && stage == 2 ){
+            
+           delay(3000);
+           Serial.print("Stage2");
+
+           GleisA = true;
+           
+           abkuppeln = false;
+           aPowerEnabled = true;
+           stage = 3;           
+      }
+    
     
     if(abkuppeln == true)
     {       Serial.print("Abkuppeln");
             mySwitch.send(5678, 24); // Der 433mhz Sender versendet die Dezimalzahl „5678“
             delay (50); // 50 Millisekunden Pause
-            abkuppeln = false;
+            
     }
 
     if(ankuppeln == true)
     {       Serial.print("Ankuppeln");
              mySwitch.send(1234, 24); // Der 433mhz Sender versendet die Dezimalzahl „1234“
              delay (50); // 50 Millisekunden Pause
-             ankuppeln = false;
+             
+    }
+
+
+     if (aPowerEnabled == true) {                                     
+      digitalWrite(RELAY4, LOW);
+                                               
+    } else {
+      digitalWrite(RELAY4, HIGH);
+    }
+
+    if (aDirectionChange == true) {
+      digitalWrite(RELAY2, LOW);
+      digitalWrite(RELAY3, LOW);
+      
+     } else {  
+      digitalWrite(RELAY2, HIGH);
+      digitalWrite(RELAY3, HIGH);
+      
     }
     
     /// Servo
-
+    if (GleisA == true){
     // scan from 0 to 180 degrees
-    for(angle = 10; angle < 121; angle++)  
-    {                                  
-      servo.write(angle);               
-      delay(15);                   
-    } 
-    // now scan back from 180 to 0 degrees
+    delay(1000);
+    servo.write(115);
+    }else{
+    servo.write(10);
+      }
+
+     if (GleisB == true){
+    // scan back from 180 to 0 degrees
     for(angle = 121; angle > 10; angle--)    
     {                                
       servo.write(angle);           
       delay(15);       
     }
-    
+     }
 } //Mit dieser Klammer wird der Loop-Teil geschlossen.
