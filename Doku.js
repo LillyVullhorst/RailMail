@@ -39,6 +39,7 @@ let text15 = loadImage("Texte/Standortbestimmung.png");
 //Bilder
 let umschlagslager = loadImage("Bilder/Umschlagslagervonoben.png");
 let team = loadImage("Bilder/dasTeam.jpg");
+let railMail = loadImage("Bilder/Logo.png");
 let station1 =loadImage("Bilder/PaketstationAus.png");
 let station2 = loadImage("Bilder/PaketstationAktiv.png");
 let station3 = loadImage("Bilder/PaketstationFach.png");
@@ -117,7 +118,7 @@ let shadowNav = new Background(topShadow,0,windowWidth/16.5,windowWidth,windowWi
 let bkasten = new Background(buttonkasten,windowWidth/1.28,windowWidth/0.375,windowWidth/15,windowWidth/15);
 
 //Texte
-let einleitung = new Background(text1,windowWidth/2.6,windowWidth/3.48,windowWidth/4.465,windowWidth/6.4);
+let einleitung = new Background(text1,windowWidth/9,windowWidth/6.2,windowWidth/4.465,windowWidth/6.4);
 let problem = new Background(text2,windowWidth/9,windowWidth/1.4,windowWidth/2.954,windowWidth/6.4);
 let einPaketBestellen = new Background(text3,windowWidth/4,windowWidth/0.8,windowWidth/2.06,windowWidth/2.4);
 let Nachricht = new Background(text4,windowWidth/4.98,windowWidth/6,windowWidth/2.612,windowWidth/2.07);
@@ -133,12 +134,13 @@ var derZug = new Background(train,windowWidth/15.5,zugY,windowWidth/30.5,windowW
 
 let customer = new Background(text12,windowWidth/5.2,windowWidth/3.5,windowWidth/1.4,windowWidth/2.75);
 let endcustomer = new Background(text13,windowWidth/5.2,windowWidth/1.27,windowWidth/2.94,windowWidth/3.51);
-let ort = new Background(text14,windowWidth/5.2,windowWidth/0.76,windowWidth/1.45,windowWidth/9.8);
+let ort = new Background(text14,windowWidth/5.2,windowWidth/0.76,windowWidth/1.89,windowWidth/9.79);
 var dieStandortbestimmung = new Background(text15,windowWidth/3,windowWidth/0.308,windowWidth/2.9,windowWidth/2.66);
 
 //Bilder
 let umschlagslagerbild = new Background(umschlagslager, windowWidth/3.4,windowWidth/1.8,windowWidth/2.86,windowWidth/4.8);
-let dasTeam = new Background(team,windowWidth/9,windowWidth/3.5,windowWidth/4.27,windowWidth/6.4);
+let dasTeam = new Background(team,windowWidth/9,windowWidth/2.7,windowWidth/4.27,windowWidth/6.4);
+let ourLogo = new Background(railMail,windowWidth/2.6,windowWidth/2.85,windowWidth/5.63,windowWidth/4.78);
 let stationAus = new Background(station1,windowWidth/7,windowWidth/1.2,windowWidth/4.8,windowWidth/4.8);
 let stationAn = new Background(station2,windowWidth/7,windowWidth/1.2,windowWidth/4.8,windowWidth/4.8);
 let stationFach = new Background(station3,windowWidth/7,windowWidth/1.2,windowWidth/4.8,windowWidth/4.8);
@@ -272,6 +274,7 @@ function draw(){
     problem.display();
     //Schienen.display();
     dasTeam.display();
+    ourLogo.display()
     einPaketBestellen.display();
    
    
