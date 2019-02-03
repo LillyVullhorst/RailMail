@@ -39,7 +39,7 @@ let text17 = loadImage("Texte/Alleinstellungsmerkmal.png");
 let text18 = loadImage("Texte/Marketingmaßnahmen.png");
 let text19 = loadImage("Texte/Prototext.png");
 let text20 = loadImage("Texte/Gegenmaßnahmen.png");
-
+let text21 = loadImage("Texte/techStation2.png");
 
 //let gif = loadImage("Schienen.gif");
 
@@ -139,8 +139,10 @@ let abstract = new Background(text8,windowWidth/3.2,windowWidth/1.32,windowWidth
 
 let umschlagspunkt = new Background(text9,windowWidth/3.45,windowWidth/5,windowWidth/2.93,windowWidth/2.8);
 let wagonText = new Background (text10,windowWidth/4,windowWidth/0.78,windowWidth/2.9,windowWidth/2.43);
-let innerStation = new Background(text11,windowWidth/3,windowWidth/0.43,windowWidth/2.9,windowWidth/3.3);
+let innerStation = new Background(text11,windowWidth/3,windowWidth/0.435,windowWidth/1.64,windowWidth/2.94);
+let innerStation2 = new Background(text21,windowWidth/3,windowWidth/0.337,windowWidth/1.68,windowWidth/18.64);
 var derZug = new Background(train,windowWidth/15.5,zugY,windowWidth/30.5,windowWidth/4.03);
+
 
 let customer = new Background(text12,windowWidth/5.2,windowWidth/3.5,windowWidth/1.4,windowWidth/2.75);
 let endcustomer = new Background(text13,windowWidth/5.2,windowWidth/1.27,windowWidth/2.865,windowWidth/3.45);
@@ -352,6 +354,7 @@ function draw(){
         wagonText.display();
         wagonEbene.display()
         innerStation.display();
+        innerStation2.display();
         inStation.display();
         //bkasten.display();
         
